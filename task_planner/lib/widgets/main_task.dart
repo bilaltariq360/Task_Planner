@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:task_planner/screens/add_sub_tasks.dart';
 import 'package:task_planner/screens/edit_task.dart';
 
 import '../providers/tasks_provider.dart';
@@ -240,7 +241,10 @@ class MainTask extends StatelessWidget {
                           size: 40,
                           color: Colors.white,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, AddSubTask.routeName,
+                              arguments: heading);
+                        },
                       ),
                     ],
                   ),

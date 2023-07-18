@@ -146,7 +146,8 @@ class _EditTaskState extends State<EditTask> {
                     color: Colors.black,
                   ),
                   child: Text(
-                    DateFormat('yMMMMEEEEd').format(DateTime.now()),
+                    DateFormat('yMMMMEEEEd')
+                        .format(tasks.tasks[widget.i].createDate),
                     style: TextStyle(
                         fontSize: MediaQuery.of(context).size.aspectRatio * 35,
                         color: Colors.white),
@@ -161,7 +162,7 @@ class _EditTaskState extends State<EditTask> {
                     color: Colors.black,
                   ),
                   child: Text(
-                    DateFormat('jm').format(DateTime.now()),
+                    DateFormat('jm').format(tasks.tasks[widget.i].createDate),
                     style: TextStyle(
                         fontSize: MediaQuery.of(context).size.aspectRatio * 35,
                         color: Colors.white),
