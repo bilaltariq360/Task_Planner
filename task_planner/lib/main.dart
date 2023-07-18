@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import './providers/tasks_provider.dart';
 
 import './screens/home_screen.dart';
-import 'screens/add_task_screen.dart';
+import './screens/add_task_screen.dart';
+import 'screens/edit_task.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           AddTask.routeName: (context) => AddTask(),
+          EditTask.routeName: (context) => EditTask(),
         },
       ),
     );

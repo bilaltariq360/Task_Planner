@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:task_planner/screens/edit_task.dart';
 
 import '../providers/tasks_provider.dart';
 
@@ -8,11 +9,54 @@ class MainTask extends StatelessWidget {
   final String imagePath;
   final String heading;
 
+  Future<void> showAlertBox(BuildContext context, TasksProvider tasks) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Row(
+            children: [
+              const Text('Warning'),
+              const SizedBox(width: 10),
+              Icon(
+                CupertinoIcons.exclamationmark_triangle_fill,
+                color: Colors.red[500],
+              )
+            ],
+          ),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Are you sure you want to delete this permanently?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Delete'),
+              onPressed: () {
+                tasks.removeTask(heading);
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   const MainTask(this.heading, this.imagePath, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    var tasks = Provider.of<TasksProvider>(context, listen: false);
+    var tasks = Provider.of<TasksProvider>(context);
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
       width: double.infinity,
@@ -93,7 +137,12 @@ class MainTask extends StatelessWidget {
                                                 BorderRadius.circular(30),
                                           ),
                                           child: ElevatedButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                              Navigator.pushNamed(
+                                                  context, EditTask.routeName,
+                                                  arguments: heading);
+                                            },
                                             style: ElevatedButton.styleFrom(
                                               backgroundColor: Colors.green[50],
                                               shape: RoundedRectangleBorder(
@@ -139,8 +188,8 @@ class MainTask extends StatelessWidget {
                                           ),
                                           child: ElevatedButton(
                                             onPressed: () {
-                                              tasks.removeTask(heading);
                                               Navigator.of(context).pop();
+                                              showAlertBox(context, tasks);
                                             },
                                             style: ElevatedButton.styleFrom(
                                               backgroundColor: Colors.red[50],
