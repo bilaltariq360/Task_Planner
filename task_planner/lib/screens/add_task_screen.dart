@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:task_planner/widgets/show_functions.dart';
 
 import '../providers/tasks_provider.dart';
 
@@ -17,22 +18,6 @@ class _AddTaskState extends State<AddTask> {
   TextEditingController taskText = TextEditingController();
   int themeIndex = 1;
   String themePath = 'assets/images/dark-purple-blue-bg.png';
-
-  SnackBar showSnackbarText(String label) {
-    return SnackBar(
-      backgroundColor: Colors.black,
-      content: Text(
-        label,
-        style: const TextStyle(fontSize: 15),
-      ),
-      duration: const Duration(milliseconds: 1500),
-      action: SnackBarAction(
-        label: 'Ok',
-        textColor: Colors.red[400],
-        onPressed: () {},
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +50,8 @@ class _AddTaskState extends State<AddTask> {
                       if (taskText.text.isEmpty) {
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                         ScaffoldMessenger.of(context).showSnackBar(
-                            showSnackbarText('Enter Valid Task Name!'));
+                            ShowFunctions.showSnackbarText(
+                                'Enter Valid Project Name!'));
                       } else {
                         if (themeIndex == 1) {
                           themePath = 'assets/images/dark-purple-blue-bg.png';
@@ -91,7 +77,7 @@ class _AddTaskState extends State<AddTask> {
             Container(
               margin: const EdgeInsets.only(left: 20, top: 25),
               child: Text(
-                'New Task',
+                'New Project',
                 style: TextStyle(
                   fontSize: MediaQuery.of(context).size.aspectRatio * 90,
                   fontWeight: FontWeight.w800,
@@ -287,7 +273,7 @@ class _AddTaskState extends State<AddTask> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  hintText: 'Task Name',
+                  hintText: 'Project Name',
                   hintStyle: const TextStyle(color: Colors.grey),
                   counterStyle: TextStyle(color: Colors.red[700]),
                   prefixIcon:

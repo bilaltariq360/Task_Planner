@@ -93,7 +93,7 @@ class _EditTaskState extends State<EditTask> {
                       if (taskText.text.isEmpty) {
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                         ScaffoldMessenger.of(context).showSnackBar(
-                            showSnackbarText('Enter Valid Task Name!'));
+                            showSnackbarText('Enter Valid Project Name!'));
                       } else {
                         if (themeIndex == 1) {
                           themePath = 'assets/images/dark-purple-blue-bg.png';
@@ -119,7 +119,7 @@ class _EditTaskState extends State<EditTask> {
             Container(
               margin: const EdgeInsets.only(left: 20, top: 25),
               child: Text(
-                'Edit Task',
+                'Edit Project',
                 style: TextStyle(
                   fontSize: MediaQuery.of(context).size.aspectRatio * 90,
                   fontWeight: FontWeight.w800,
@@ -316,7 +316,7 @@ class _EditTaskState extends State<EditTask> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  hintText: 'Task Name',
+                  hintText: 'Project Name',
                   hintStyle: const TextStyle(color: Colors.grey),
                   counterStyle: TextStyle(color: Colors.red[700]),
                   prefixIcon:

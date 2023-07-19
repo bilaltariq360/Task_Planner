@@ -5,6 +5,22 @@ import '../providers/tasks_provider.dart';
 import '../screens/edit_task.dart';
 
 class ShowFunctions {
+  static SnackBar showSnackbarText(String label) {
+    return SnackBar(
+      backgroundColor: Colors.black,
+      content: Text(
+        label,
+        style: const TextStyle(fontSize: 15),
+      ),
+      duration: const Duration(milliseconds: 1500),
+      action: SnackBarAction(
+        label: 'Ok',
+        textColor: Colors.red[400],
+        onPressed: () {},
+      ),
+    );
+  }
+
   static Future<void> showAlertBox(
       BuildContext context, String heading, TasksProvider tasks) async {
     return showDialog<void>(
@@ -392,9 +408,16 @@ class ShowFunctions {
                       ),
                       child: ElevatedButton(
                         onPressed: () {
-                          tasks.addSubTask(heading, subTaskText.text,
-                              descText.text, pirorityIndex);
-                          Navigator.of(context).pop();
+                          if (subTaskText.text.isEmpty) {
+                            Navigator.of(context).pop();
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                showSnackbarText('Enter Valid Task Name!'));
+                          } else {
+                            tasks.addSubTask(heading, subTaskText.text,
+                                descText.text, pirorityIndex);
+                            Navigator.of(context).pop();
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.black,
