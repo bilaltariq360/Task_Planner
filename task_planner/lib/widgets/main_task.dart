@@ -80,7 +80,7 @@ class MainTask extends StatelessWidget {
                                   color: Colors.white,
                                 ),
                                 onPressed: () {
-                                  ShowFunctions.dialogBox(
+                                  ShowFunctionsState.dialogBox(
                                       context, heading, tasks);
                                 },
                               )
@@ -97,8 +97,13 @@ class MainTask extends StatelessWidget {
                             color: Colors.white,
                           ),
                           onPressed: () {
-                            ShowFunctions.bottomModalSheet(context, heading,
-                                pirorityIndex, tasks, subTaskText, descText);
+                            ShowFunctionsState.bottomModalSheet(
+                                context,
+                                heading,
+                                pirorityIndex,
+                                tasks,
+                                subTaskText,
+                                descText);
                           },
                         ),
                       ],

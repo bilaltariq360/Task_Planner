@@ -50,7 +50,7 @@ class _AddTaskState extends State<AddTask> {
                       if (taskText.text.isEmpty) {
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                         ScaffoldMessenger.of(context).showSnackBar(
-                            ShowFunctions.showSnackbarText(
+                            ShowFunctionsState.showSnackbarText(
                                 'Enter Valid Project Name!'));
                       } else {
                         if (themeIndex == 1) {
@@ -113,22 +113,7 @@ class _AddTaskState extends State<AddTask> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 20, left: 20),
-              //padding: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  border: Border.all(width: 1, color: Colors.black)),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  CupertinoIcons.bell_slash,
-                  size: 25,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(left: 20, top: 30),
+              margin: const EdgeInsets.only(left: 20, top: 80),
               child: Text(
                 'Select Theme',
                 style: TextStyle(
@@ -283,35 +268,6 @@ class _AddTaskState extends State<AddTask> {
                 maxLength: 20,
               ),
             ),
-            /*Container(
-              margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-              child: TextField(
-                controller: descText,
-                cursorColor: Colors.black,
-                decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide:
-                        const BorderSide(width: 1.5, color: Colors.black),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide:
-                        const BorderSide(width: 1.5, color: Colors.black),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  hintText: 'Task Description (Optional)',
-                  hintStyle: const TextStyle(color: Colors.grey),
-                  counterStyle: TextStyle(color: Colors.red[700]),
-                  prefixIcon: const Icon(CupertinoIcons.news),
-                ),
-                autocorrect: true,
-                maxLength: 100,
-                maxLines: 3,
-              ),
-            ),*/
           ],
         ),
       ),

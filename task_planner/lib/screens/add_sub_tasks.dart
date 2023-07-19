@@ -88,8 +88,13 @@ class _AddSubTaskState extends State<AddSubTask> {
                     color: Colors.black,
                   ),
                   onPressed: () {
-                    ShowFunctions.bottomModalSheet(context, task!.taskHeading,
-                        pirorityIndex, tasks, subTaskText, descText);
+                    ShowFunctionsState.bottomModalSheet(
+                        context,
+                        task!.taskHeading,
+                        pirorityIndex,
+                        tasks,
+                        subTaskText,
+                        descText);
                   },
                 ),
               ],

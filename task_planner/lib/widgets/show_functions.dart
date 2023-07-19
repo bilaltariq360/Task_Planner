@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 
 import '../providers/tasks_provider.dart';
 import '../screens/edit_task.dart';
 
-class ShowFunctions {
+class ShowFunctions extends StatefulWidget {
+  const ShowFunctions({super.key});
+
+  @override
+  State<ShowFunctions> createState() => ShowFunctionsState();
+}
+
+class ShowFunctionsState extends State<ShowFunctions> {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox();
+  }
+
+  static DateTime? dateTime;
+
   static SnackBar showSnackbarText(String label) {
     return SnackBar(
       backgroundColor: Colors.black,
@@ -87,10 +102,6 @@ class ShowFunctions {
                     width: double.infinity,
                     height: 50,
                     decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 1.5,
-                        color: const Color.fromRGBO(76, 175, 80, 1),
-                      ),
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: ElevatedButton(
@@ -100,26 +111,26 @@ class ShowFunctions {
                             arguments: heading);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green[50],
+                        backgroundColor: Colors.green[500],
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50),
                         ),
                         elevation: 0,
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
                             CupertinoIcons.pen,
                             size: 28,
-                            color: Colors.green[500],
+                            color: Colors.white,
                           ),
-                          const SizedBox(width: 10),
+                          SizedBox(width: 10),
                           Text(
                             'Edit',
                             style: TextStyle(
                               fontSize: 17,
-                              color: Colors.green[500],
+                              color: Colors.white,
                             ),
                           ),
                         ],
@@ -131,10 +142,6 @@ class ShowFunctions {
                     width: double.infinity,
                     height: 50,
                     decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 1.5,
-                        color: const Color.fromRGBO(244, 67, 54, 1),
-                      ),
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: ElevatedButton(
@@ -143,26 +150,26 @@ class ShowFunctions {
                         showAlertBox(context, heading, tasks);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red[50],
+                        backgroundColor: Colors.red[500],
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50),
                         ),
                         elevation: 0,
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
                             CupertinoIcons.delete,
                             size: 20,
-                            color: Colors.red[500],
+                            color: Colors.white,
                           ),
-                          const SizedBox(width: 10),
+                          SizedBox(width: 10),
                           Text(
                             'Delete',
                             style: TextStyle(
                               fontSize: 17,
-                              color: Colors.red[500],
+                              color: Colors.white,
                             ),
                           ),
                         ],
@@ -263,6 +270,120 @@ class ShowFunctions {
                         maxLines: 3,
                       ),
                     ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Add Reminder',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w800),
+                          ),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.only(top: 20),
+                                  //padding: const EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50),
+                                      border: Border.all(
+                                          width: 1, color: Colors.black)),
+                                  child: IconButton(
+                                    onPressed: () async {
+                                      final DateTime? pickedDate =
+                                          await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        initialDatePickerMode:
+                                            DatePickerMode.day,
+                                        firstDate: DateTime(2023),
+                                        lastDate: DateTime(2025),
+                                      );
+
+                                      if (pickedDate != null) {
+                                        final TimeOfDay? pickedTime =
+                                            await showTimePicker(
+                                          context: context,
+                                          initialTime: TimeOfDay.now(),
+                                        );
+
+                                        if (pickedTime != null) {
+                                          DateTime selectedDateTime = DateTime(
+                                            pickedDate.year,
+                                            pickedDate.month,
+                                            pickedDate.day,
+                                            pickedTime.hour,
+                                            pickedTime.minute,
+                                          );
+                                          setState(() {
+                                            dateTime = selectedDateTime;
+                                          });
+                                        }
+                                      }
+                                      ;
+                                    },
+                                    icon: const Icon(
+                                      Icons.alarm_add,
+                                      size: 25,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                (dateTime != null)
+                                    ? Container(
+                                        margin: const EdgeInsets.only(
+                                            left: 10, top: 20),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 15, horizontal: 25),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          color: Colors.black,
+                                        ),
+                                        child: Text(
+                                          DateFormat('yMMMMEEEEd')
+                                              .format(dateTime!),
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .aspectRatio *
+                                                  35,
+                                              color: Colors.white),
+                                        ),
+                                      )
+                                    : const SizedBox(),
+                                (dateTime != null)
+                                    ? Container(
+                                        margin: const EdgeInsets.only(
+                                            left: 10, top: 20),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 15, horizontal: 25),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          color: Colors.black,
+                                        ),
+                                        child: Text(
+                                          DateFormat('jm').format(dateTime!),
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .aspectRatio *
+                                                  35,
+                                              color: Colors.white),
+                                        ),
+                                      )
+                                    : const SizedBox(),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 30),
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 10),
                       child: Column(
@@ -273,9 +394,7 @@ class ShowFunctions {
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.w800),
                           ),
-                          const SizedBox(
-                            height: 30,
-                          ),
+                          const SizedBox(height: 30),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -454,5 +573,6 @@ class ShowFunctions {
         );
       },
     );
+    ShowFunctionsState.dateTime = null;
   }
 }

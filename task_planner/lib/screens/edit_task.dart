@@ -156,22 +156,7 @@ class _EditTaskState extends State<EditTask> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 20, left: 20),
-              //padding: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  border: Border.all(width: 1, color: Colors.black)),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  CupertinoIcons.bell_slash,
-                  size: 25,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(left: 20, top: 30),
+              margin: const EdgeInsets.only(left: 20, top: 80),
               child: Text(
                 'Select Theme',
                 style: TextStyle(
