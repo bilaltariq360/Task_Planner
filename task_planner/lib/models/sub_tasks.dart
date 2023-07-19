@@ -4,11 +4,12 @@ class SubTasks {
   final DateTime creationTime = DateTime.now();
   DateTime? completedTime;
   DateTime? notification;
-  bool completed;
+  final int pirority;
+  bool completed = false;
 
   SubTasks({
     required this.task,
     required this.descriptoin,
-    this.completed = false,
+    required this.pirority,
   });
 }

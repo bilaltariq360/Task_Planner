@@ -344,35 +344,6 @@ class _EditTaskState extends State<EditTask> {
                     maxLength: 20,
                   ),
                 ),
-                /*Container(
-                  margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  child: TextField(
-                    controller: descText,
-                    cursorColor: Colors.black,
-                    decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide:
-                            const BorderSide(width: 1.5, color: Colors.black),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide:
-                            const BorderSide(width: 1.5, color: Colors.black),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      hintText: 'Task Description (Optional)',
-                      hintStyle: const TextStyle(color: Colors.grey),
-                      counterStyle: TextStyle(color: Colors.red[700]),
-                      prefixIcon: const Icon(CupertinoIcons.news),
-                    ),
-                    autocorrect: true,
-                    maxLength: 100,
-                    maxLines: 3,
-                  ),
-                ),*/
               ],
             ),
           ),

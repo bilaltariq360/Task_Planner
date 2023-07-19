@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../models/sub_tasks.dart';
 import '../models/tasks.dart';
 
 class TasksProvider with ChangeNotifier {
@@ -25,5 +26,17 @@ class TasksProvider with ChangeNotifier {
     tasks[index].imagePath = imgPath;
 
     notifyListeners();
+  }
+
+  void addSubTask(
+      String tasksHeading, String subTask, String desc, int pirority) {
+    for (var task in tasks) {
+      if (task.taskHeading == tasksHeading) {
+        task.subTasks.add(
+            SubTasks(task: subTask, descriptoin: desc, pirority: pirority));
+        notifyListeners();
+        return;
+      }
+    }
   }
 }

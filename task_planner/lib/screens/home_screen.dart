@@ -58,7 +58,7 @@ class Home extends StatelessWidget {
               ),
               const Profile(),
               ...tasks.tasks.map((task) {
-                return MainTask(task.taskHeading, task.imagePath);
+                return MainTask(task.taskHeading, task.imagePath, true);
               }),
             ],
           ),

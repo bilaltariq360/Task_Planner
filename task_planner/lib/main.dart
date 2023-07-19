@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         routes: {
           AddTask.routeName: (context) => AddTask(),
           EditTask.routeName: (context) => EditTask(),
-          AddSubTask.routeName: (context) => AddSubTask(),
+          AddSubTask.routeName: (context) => const AddSubTask(),
         },
       ),
     );
