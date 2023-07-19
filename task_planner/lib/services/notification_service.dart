@@ -11,8 +11,6 @@ class NotificationService {
             channelKey: 'basic_channel',
             channelName: 'Basic notifications',
             channelDescription: 'Notification channel for basic tests',
-            defaultColor: Colors.black,
-            ledColor: Colors.white,
             importance: NotificationImportance.Max,
             playSound: true,
             criticalAlerts: true)

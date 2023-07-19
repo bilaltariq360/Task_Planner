@@ -1,4 +1,3 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -48,7 +47,7 @@ class _AddTaskState extends State<AddTask> {
                 Container(
                   margin: const EdgeInsets.only(top: 20, right: 20),
                   child: IconButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (taskText.text.isEmpty) {
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -64,14 +63,12 @@ class _AddTaskState extends State<AddTask> {
                         } else if (themeIndex == 4) {
                           themePath = 'assets/images/purple-bg.png';
                         }
-
                         NotificationService.initializeNotification();
                         NotificationService.showNotification(
-                            title: 'Task Planner',
-                            body:
-                                'New project ${taskText.text} added successfully!',
-                            notificationLayout: NotificationLayout.BigPicture,
-                            bigPicture: themePath);
+                          title: 'Task Planner',
+                          body:
+                              'New project ${taskText.text} added successfully!',
+                        );
                         tasks.addTask(taskText.text, themePath);
                         Navigator.of(context).pop();
                       }
