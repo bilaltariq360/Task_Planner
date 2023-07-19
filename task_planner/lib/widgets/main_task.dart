@@ -65,8 +65,10 @@ class MainTask extends StatelessWidget {
     var tasks = Provider.of<TasksProvider>(context);
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, AddSubTask.routeName,
-            arguments: [heading, imagePath]);
+        if (moreOptions) {
+          Navigator.pushNamed(context, AddSubTask.routeName,
+              arguments: [heading, imagePath]);
+        }
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),

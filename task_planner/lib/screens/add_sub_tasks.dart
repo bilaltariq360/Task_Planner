@@ -128,6 +128,9 @@ class _AddSubTaskState extends State<AddSubTask> {
                                     TextButton(
                                       child: const Text('Delete'),
                                       onPressed: () {
+                                        setState(() {
+                                          subTasks.remove(tile);
+                                        });
                                         Navigator.of(context).pop(true);
                                       },
                                     ),
@@ -206,10 +209,14 @@ class _AddSubTaskState extends State<AddSubTask> {
                                     ? TextDecoration.lineThrough
                                     : null),
                           ),
-                          minVerticalPadding: 20,
-                          trailing: Text(
+                          minVerticalPadding: 10,
+                          /*trailing: Text(
                             DateFormat('jm').format(tile.creationTime),
                             style: const TextStyle(fontSize: 12),
+                          ),*/
+                          trailing: const Icon(
+                            Icons.drag_indicator,
+                            color: Colors.grey,
                           ),
                         ),
                       ),
