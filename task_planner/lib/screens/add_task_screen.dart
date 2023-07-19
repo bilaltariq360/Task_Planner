@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -68,7 +69,9 @@ class _AddTaskState extends State<AddTask> {
                         NotificationService.showNotification(
                             title: 'Task Planner',
                             body:
-                                'New project ${taskText.text} added successfully!');
+                                'New project ${taskText.text} added successfully!',
+                            notificationLayout: NotificationLayout.BigPicture,
+                            bigPicture: themePath);
                         tasks.addTask(taskText.text, themePath);
                         Navigator.of(context).pop();
                       }

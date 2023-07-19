@@ -11,5 +11,6 @@ class SubTasks {
     required this.task,
     required this.descriptoin,
     required this.pirority,
+    DateTime? notification,
   });
 }

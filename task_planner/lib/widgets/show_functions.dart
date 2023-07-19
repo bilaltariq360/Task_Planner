@@ -535,13 +535,23 @@ class ShowFunctionsState extends State<ShowFunctions> {
                                 showSnackbarText('Enter Valid Task Name!'));
                           } else {
                             tasks.addSubTask(heading, subTaskText.text,
-                                descText.text, pirorityIndex);
+                                descText.text, pirorityIndex, dateTime);
                             Navigator.of(context).pop();
                             NotificationService.initializeNotification();
+                            if (dateTime != null) {
+                              NotificationService.showNotification(
+                                  title: 'Task Planner',
+                                  body:
+                                      'Reminder for task (${subTaskText.text}) in project $heading',
+                                  scheduled: true,
+                                  interval: dateTime!
+                                      .difference(DateTime.now())
+                                      .inSeconds);
+                            }
                             NotificationService.showNotification(
                                 title: 'Task Planner',
                                 body:
-                                    'New task successfully added to project $heading!');
+                                    'New task added to project $heading successfully!');
                           }
                         },
                         style: ElevatedButton.styleFrom(

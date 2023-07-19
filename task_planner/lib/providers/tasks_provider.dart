@@ -28,12 +28,20 @@ class TasksProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addSubTask(
-      String tasksHeading, String subTask, String desc, int pirority) {
+  void addSubTask(String tasksHeading, String subTask, String desc,
+      int pirority, DateTime? dateTime) {
     for (var task in tasks) {
       if (task.taskHeading == tasksHeading) {
-        task.subTasks.add(
-            SubTasks(task: subTask, descriptoin: desc, pirority: pirority));
+        if (dateTime == null) {
+          task.subTasks.add(
+              SubTasks(task: subTask, descriptoin: desc, pirority: pirority));
+        } else {
+          task.subTasks.add(SubTasks(
+              task: subTask,
+              descriptoin: desc,
+              pirority: pirority,
+              notification: dateTime));
+        }
         notifyListeners();
         return;
       }
