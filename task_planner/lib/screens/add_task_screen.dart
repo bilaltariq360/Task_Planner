@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:task_planner/widgets/show_functions.dart';
 
 import '../providers/tasks_provider.dart';
+import '../services/notification_service.dart';
 
 class AddTask extends StatefulWidget {
   static String routeName = '/add-task';
@@ -62,6 +63,12 @@ class _AddTaskState extends State<AddTask> {
                         } else if (themeIndex == 4) {
                           themePath = 'assets/images/purple-bg.png';
                         }
+
+                        NotificationService.initializeNotification();
+                        NotificationService.showNotification(
+                            title: 'Task Planner',
+                            body:
+                                'New project ${taskText.text} added successfully!');
                         tasks.addTask(taskText.text, themePath);
                         Navigator.of(context).pop();
                       }

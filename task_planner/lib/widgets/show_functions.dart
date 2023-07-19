@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../providers/tasks_provider.dart';
 import '../screens/edit_task.dart';
+import '../services/notification_service.dart';
 
 class ShowFunctions extends StatefulWidget {
   const ShowFunctions({super.key});
@@ -536,6 +537,11 @@ class ShowFunctionsState extends State<ShowFunctions> {
                             tasks.addSubTask(heading, subTaskText.text,
                                 descText.text, pirorityIndex);
                             Navigator.of(context).pop();
+                            NotificationService.initializeNotification();
+                            NotificationService.showNotification(
+                                title: 'Task Planner',
+                                body:
+                                    'New task successfully added to project $heading!');
                           }
                         },
                         style: ElevatedButton.styleFrom(
