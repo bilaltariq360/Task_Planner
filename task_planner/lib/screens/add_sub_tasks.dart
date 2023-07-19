@@ -6,8 +6,7 @@ import 'package:intl/intl.dart';
 import '../models/sub_tasks.dart';
 import '../models/tasks.dart';
 import '../providers/tasks_provider.dart';
-import '../widgets/main_task.dart';
-import '../widgets/bottom_modal_sheet.dart';
+import '../widgets/show_functions.dart';
 
 class AddSubTask extends StatefulWidget {
   static String routeName = '/add-sub-task';
@@ -22,48 +21,6 @@ class _AddSubTaskState extends State<AddSubTask> {
   int pirorityIndex = 1;
   TextEditingController subTaskText = TextEditingController();
   TextEditingController descText = TextEditingController();
-
-  Future<void> showAlertBox(BuildContext context) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Row(
-            children: [
-              const Text('Warning'),
-              const SizedBox(width: 10),
-              Icon(
-                CupertinoIcons.exclamationmark_triangle_fill,
-                color: Colors.red[500],
-              )
-            ],
-          ),
-          content: const SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Are you sure you want to delete this permanently?'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Delete'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +69,7 @@ class _AddSubTaskState extends State<AddSubTask> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 20, bottom: 20),
+            padding: const EdgeInsets.only(left: 20, bottom: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -131,13 +88,8 @@ class _AddSubTaskState extends State<AddSubTask> {
                     color: Colors.black,
                   ),
                   onPressed: () {
-                    BottomModalSheet.bottomModalSheet(
-                        context,
-                        task!.taskHeading,
-                        pirorityIndex,
-                        tasks,
-                        subTaskText,
-                        descText);
+                    ShowFunctions.bottomModalSheet(context, task!.taskHeading,
+                        pirorityIndex, tasks, subTaskText, descText);
                   },
                 ),
               ],

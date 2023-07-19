@@ -2,8 +2,166 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../providers/tasks_provider.dart';
+import '../screens/edit_task.dart';
 
-class BottomModalSheet {
+class ShowFunctions {
+  static Future<void> showAlertBox(
+      BuildContext context, String heading, TasksProvider tasks) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Row(
+            children: [
+              const Text('Warning'),
+              const SizedBox(width: 10),
+              Icon(
+                CupertinoIcons.exclamationmark_triangle_fill,
+                color: Colors.red[500],
+              )
+            ],
+          ),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Are you sure you want to delete this permanently?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Delete'),
+              onPressed: () {
+                tasks.removeTask(heading);
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  static void dialogBox(
+      BuildContext context, String heading, TasksProvider tasks) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: Colors.white,
+        title: const Text('Select Option'),
+        content: const Text('Select an option to perform action'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: Align(
+              alignment:
+                  Alignment.centerLeft, // Align the buttons to the left side
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 5),
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 1.5,
+                        color: const Color.fromRGBO(76, 175, 80, 1),
+                      ),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.pushNamed(context, EditTask.routeName,
+                            arguments: heading);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green[50],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        elevation: 0,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            CupertinoIcons.pen,
+                            size: 28,
+                            color: Colors.green[500],
+                          ),
+                          const SizedBox(width: 10),
+                          Text(
+                            'Edit',
+                            style: TextStyle(
+                              fontSize: 17,
+                              color: Colors.green[500],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 5),
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 1.5,
+                        color: const Color.fromRGBO(244, 67, 54, 1),
+                      ),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        showAlertBox(context, heading, tasks);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red[50],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        elevation: 0,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            CupertinoIcons.delete,
+                            size: 20,
+                            color: Colors.red[500],
+                          ),
+                          const SizedBox(width: 10),
+                          Text(
+                            'Delete',
+                            style: TextStyle(
+                              fontSize: 17,
+                              color: Colors.red[500],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   static void bottomModalSheet(
     BuildContext context,
     String heading,
