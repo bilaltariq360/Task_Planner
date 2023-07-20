@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -17,8 +19,8 @@ class AddTask extends StatefulWidget {
 
 class _AddTaskState extends State<AddTask> {
   TextEditingController taskText = TextEditingController();
-  int themeIndex = 1;
-  String themePath = 'assets/images/dark-purple-blue-bg.png';
+  int themeIndex = 0;
+  String themePath = 'assets/images/random-bg.png';
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +56,9 @@ class _AddTaskState extends State<AddTask> {
                             ShowFunctionsState.showSnackbarText(
                                 'Enter Valid Project Name!'));
                       } else {
+                        if (themeIndex == 0) {
+                          themeIndex = Random().nextInt(8) + 1;
+                        }
                         if (themeIndex == 1) {
                           themePath = 'assets/images/dark-purple-blue-bg.png';
                         } else if (themeIndex == 2) {
@@ -62,6 +67,14 @@ class _AddTaskState extends State<AddTask> {
                           themePath = 'assets/images/orange-bg.png';
                         } else if (themeIndex == 4) {
                           themePath = 'assets/images/purple-bg.png';
+                        } else if (themeIndex == 5) {
+                          themePath = 'assets/images/pattren-bg.png';
+                        } else if (themeIndex == 6) {
+                          themePath = 'assets/images/light-orange-bg.png';
+                        } else if (themeIndex == 7) {
+                          themePath = 'assets/images/gadgets-bg.png';
+                        } else if (themeIndex == 8) {
+                          themePath = 'assets/images/picachu-bg.png';
                         }
                         NotificationService.initializeNotification();
                         NotificationService.showNotification(
@@ -131,119 +144,295 @@ class _AddTaskState extends State<AddTask> {
             ),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      height: MediaQuery.of(context).size.width * 0.2,
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            themeIndex = 1;
-                          });
-                        },
-                        child: Stack(
-                          children: [
-                            Image.asset(
-                                'assets/images/dark-purple-blue-bg.png'),
-                            (themeIndex == 1)
-                                ? const Align(
-                                    alignment: Alignment.center,
-                                    child: Icon(
-                                      CupertinoIcons.check_mark_circled_solid,
-                                      color: Colors.white,
-                                    ))
-                                : const SizedBox(),
-                          ],
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 5),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.width * 0.2,
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                themeIndex = 0;
+                              });
+                            },
+                            child: Stack(
+                              children: [
+                                Image.asset('assets/images/random-bg.png'),
+                                (themeIndex == 0)
+                                    ? const Align(
+                                        alignment: Alignment.center,
+                                        child: Icon(
+                                          CupertinoIcons
+                                              .check_mark_circled_solid,
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    : const SizedBox(),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      height: MediaQuery.of(context).size.width * 0.2,
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            themeIndex = 2;
-                          });
-                        },
-                        child: Stack(
-                          children: [
-                            Image.asset('assets/images/blue-bg.png'),
-                            (themeIndex == 2)
-                                ? const Align(
-                                    alignment: Alignment.center,
-                                    child: Icon(
-                                      CupertinoIcons.check_mark_circled_solid,
-                                      color: Colors.white,
-                                    ))
-                                : const SizedBox(),
-                          ],
+                    Padding(
+                      padding: const EdgeInsets.only(right: 5, left: 5),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.width * 0.2,
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                themeIndex = 1;
+                              });
+                            },
+                            child: Stack(
+                              children: [
+                                Image.asset(
+                                    'assets/images/dark-purple-blue-bg.png'),
+                                (themeIndex == 1)
+                                    ? const Align(
+                                        alignment: Alignment.center,
+                                        child: Icon(
+                                          CupertinoIcons
+                                              .check_mark_circled_solid,
+                                          color: Colors.white,
+                                        ))
+                                    : const SizedBox(),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      height: MediaQuery.of(context).size.width * 0.2,
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            themeIndex = 3;
-                          });
-                        },
-                        child: Stack(
-                          children: [
-                            Image.asset('assets/images/orange-bg.png'),
-                            (themeIndex == 3)
-                                ? const Align(
-                                    alignment: Alignment.center,
-                                    child: Icon(
-                                      CupertinoIcons.check_mark_circled_solid,
-                                      color: Colors.white,
-                                    ))
-                                : const SizedBox(),
-                          ],
+                    Padding(
+                      padding: const EdgeInsets.only(right: 5, left: 5),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.width * 0.2,
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                themeIndex = 2;
+                              });
+                            },
+                            child: Stack(
+                              children: [
+                                Image.asset('assets/images/blue-bg.png'),
+                                (themeIndex == 2)
+                                    ? const Align(
+                                        alignment: Alignment.center,
+                                        child: Icon(
+                                          CupertinoIcons
+                                              .check_mark_circled_solid,
+                                          color: Colors.white,
+                                        ))
+                                    : const SizedBox(),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      height: MediaQuery.of(context).size.width * 0.2,
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            themeIndex = 4;
-                          });
-                        },
-                        child: Stack(
-                          children: [
-                            Image.asset('assets/images/purple-bg.png'),
-                            (themeIndex == 4)
-                                ? const Align(
-                                    alignment: Alignment.center,
-                                    child: Icon(
-                                      CupertinoIcons.check_mark_circled_solid,
-                                      color: Colors.white,
-                                    ))
-                                : const SizedBox(),
-                          ],
+                    Padding(
+                      padding: const EdgeInsets.only(right: 5, left: 5),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.width * 0.2,
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                themeIndex = 3;
+                              });
+                            },
+                            child: Stack(
+                              children: [
+                                Image.asset('assets/images/orange-bg.png'),
+                                (themeIndex == 3)
+                                    ? const Align(
+                                        alignment: Alignment.center,
+                                        child: Icon(
+                                          CupertinoIcons
+                                              .check_mark_circled_solid,
+                                          color: Colors.white,
+                                        ))
+                                    : const SizedBox(),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.only(right: 5, left: 5),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.width * 0.2,
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                themeIndex = 4;
+                              });
+                            },
+                            child: Stack(
+                              children: [
+                                Image.asset('assets/images/purple-bg.png'),
+                                (themeIndex == 4)
+                                    ? const Align(
+                                        alignment: Alignment.center,
+                                        child: Icon(
+                                          CupertinoIcons
+                                              .check_mark_circled_solid,
+                                          color: Colors.white,
+                                        ))
+                                    : const SizedBox(),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 5, left: 5),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.width * 0.2,
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                themeIndex = 5;
+                              });
+                            },
+                            child: Stack(
+                              children: [
+                                Image.asset('assets/images/pattren-bg.png'),
+                                (themeIndex == 5)
+                                    ? const Align(
+                                        alignment: Alignment.center,
+                                        child: Icon(
+                                          CupertinoIcons
+                                              .check_mark_circled_solid,
+                                          color: Colors.white,
+                                        ))
+                                    : const SizedBox(),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 5, left: 5),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.width * 0.2,
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                themeIndex = 6;
+                              });
+                            },
+                            child: Stack(
+                              children: [
+                                Image.asset(
+                                    'assets/images/light-orange-bg.png'),
+                                (themeIndex == 6)
+                                    ? const Align(
+                                        alignment: Alignment.center,
+                                        child: Icon(
+                                          CupertinoIcons
+                                              .check_mark_circled_solid,
+                                          color: Colors.white,
+                                        ))
+                                    : const SizedBox(),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 5, left: 5),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.width * 0.2,
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                themeIndex = 7;
+                              });
+                            },
+                            child: Stack(
+                              children: [
+                                Image.asset('assets/images/gadgets-bg.png'),
+                                (themeIndex == 7)
+                                    ? const Align(
+                                        alignment: Alignment.center,
+                                        child: Icon(
+                                          CupertinoIcons
+                                              .check_mark_circled_solid,
+                                          color: Colors.white,
+                                        ))
+                                    : const SizedBox(),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.width * 0.2,
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                themeIndex = 8;
+                              });
+                            },
+                            child: Stack(
+                              children: [
+                                Image.asset('assets/images/picachu-bg.png'),
+                                (themeIndex == 8)
+                                    ? const Align(
+                                        alignment: Alignment.center,
+                                        child: Icon(
+                                          CupertinoIcons
+                                              .check_mark_circled_solid,
+                                          color: Colors.white,
+                                        ))
+                                    : const SizedBox(),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Container(

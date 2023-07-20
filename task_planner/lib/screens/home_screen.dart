@@ -25,7 +25,9 @@ class Home extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(left: 20),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
                   icon: const Icon(
                     CupertinoIcons.bars,
                     size: 35,

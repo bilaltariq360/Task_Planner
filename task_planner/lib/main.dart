@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +29,99 @@ class MyApp extends StatelessWidget {
         ),
         home: const Scaffold(
           body: Home(),
-          drawer: Drawer(),
+          drawer: Drawer(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 50),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            CupertinoIcons.settings,
+                            size: 30,
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            'Profile Settings',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      Divider(thickness: 2),
+                      SizedBox(height: 20),
+                      InkWell(
+                        child: Row(
+                          children: [
+                            SizedBox(width: 10),
+                            Icon(
+                              CupertinoIcons.pen,
+                              size: 22,
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              'Edit Name',
+                              style: TextStyle(fontSize: 15),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 25),
+                      InkWell(
+                        child: Row(
+                          children: [
+                            SizedBox(width: 10),
+                            Icon(
+                              CupertinoIcons.person_alt_circle,
+                              size: 22,
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              'Edit Picture',
+                              style: TextStyle(fontSize: 15),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 25),
+                      InkWell(
+                        child: Row(
+                          children: [
+                            SizedBox(width: 10),
+                            Icon(
+                              CupertinoIcons.info_circle,
+                              size: 22,
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              'About Developer',
+                              style: TextStyle(fontSize: 15),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  child: Column(
+                    children: [
+                      Divider(thickness: 2),
+                      Text(
+                        'Developed by Bilal Tariq with ❤️',
+                        style: TextStyle(fontSize: 13),
+                      ),
+                      SizedBox(height: 50),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
         routes: {
           AddTask.routeName: (context) => AddTask(),
