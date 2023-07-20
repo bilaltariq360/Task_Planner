@@ -9,9 +9,10 @@ import 'show_functions.dart';
 class MainTask extends StatelessWidget {
   final String imagePath;
   final String heading;
-  final bool moreOptions;
   int pirorityIndex = 1;
-  MainTask(this.heading, this.imagePath, this.moreOptions, {super.key});
+  int total = 0;
+  int completed = 0;
+  MainTask(this.heading, this.imagePath, {super.key});
 
   final TextEditingController taskText = TextEditingController();
   final TextEditingController subTaskText = TextEditingController();
@@ -20,12 +21,18 @@ class MainTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var tasks = Provider.of<TasksProvider>(context);
+
+    for (var i = 0; i < tasks.tasks.length; i++) {
+      if (tasks.tasks[i].taskHeading == heading) {
+        total = tasks.tasks[i].subTasks.length;
+        completed = tasks.tasks[i].completedTasks.length;
+      }
+    }
+
     return InkWell(
       onTap: () {
-        if (moreOptions) {
-          Navigator.pushNamed(context, AddSubTask.routeName,
-              arguments: [heading, imagePath]);
-        }
+        Navigator.pushNamed(context, AddSubTask.routeName,
+            arguments: [heading, imagePath]);
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
@@ -60,31 +67,89 @@ class MainTask extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Row(
+                    children: [
+                      Stack(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(left: 20, right: 20),
+                            width: 30,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              border: Border.all(width: 1, color: Colors.white),
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                          ),
+                          Positioned(
+                            top: (total != 0)
+                                ? 100 - ((completed / total) * 100)
+                                : ((completed > total)
+                                    ? 0
+                                    : 100), // Adjust this value to control the position of the second container
+                            left: 20,
+                            child: Container(
+                              width: 30,
+                              height: (total != 0)
+                                  ? ((completed > total)
+                                      ? 0
+                                      : (completed / total) * 100)
+                                  : 100,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border:
+                                    Border.all(width: 1, color: Colors.white),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        '$completed/',
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 38,
+                            fontFamily: 'MavenPro'),
+                      ),
+                      Text(
+                        '$total',
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 38,
+                            fontFamily: 'MavenPro'),
+                      ),
+                      const SizedBox(width: 20),
+                      const Text(
+                        'tasks',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 38,
+                            fontFamily: 'MavenPro'),
+                      ),
+                    ],
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10, right: 10),
                     child: Row(
-                      mainAxisAlignment: (moreOptions)
-                          ? MainAxisAlignment.spaceBetween
-                          : MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        (moreOptions)
-                            ? TextButton(
-                                style: TextButton.styleFrom(
-                                  backgroundColor:
-                                      const Color.fromARGB(53, 255, 255, 255),
-                                  shape: const CircleBorder(),
-                                ),
-                                child: const Icon(
-                                  Icons.more_horiz,
-                                  size: 40,
-                                  color: Colors.white,
-                                ),
-                                onPressed: () {
-                                  ShowFunctionsState.dialogBox(
-                                      context, heading, tasks);
-                                },
-                              )
-                            : const SizedBox(),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(53, 255, 255, 255),
+                            shape: const CircleBorder(),
+                          ),
+                          child: const Icon(
+                            Icons.more_horiz,
+                            size: 40,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            ShowFunctionsState.dialogBox(
+                                context, heading, tasks);
+                          },
+                        ),
                         TextButton(
                           style: TextButton.styleFrom(
                             backgroundColor:

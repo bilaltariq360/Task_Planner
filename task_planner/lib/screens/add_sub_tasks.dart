@@ -161,6 +161,7 @@ class _AddSubTaskState extends State<AddSubTask> {
                                         onPressed: () {
                                           setState(() {
                                             subTasks.remove(tile);
+                                            tasks.notifyListeners();
                                           });
                                           Navigator.of(context).pop(true);
                                         },
@@ -180,7 +181,8 @@ class _AddSubTaskState extends State<AddSubTask> {
                               setState(() {
                                 tile.completed = true;
                                 task!.addToCompleted(tile);
-                                subTasks.remove(tile);
+                                //subTasks.remove(tile);
+                                tasks.notifyListeners();
                               });
                             }
                           },
@@ -226,35 +228,37 @@ class _AddSubTaskState extends State<AddSubTask> {
                               ),
                             ),
                           ),
-                          child: ListTile(
-                            key: ValueKey(tile),
-                            leading: CircleAvatar(
-                                radius: 8,
-                                backgroundColor: (tile.pirority == 0)
-                                    ? Colors.red[500]
-                                    : ((tile.pirority == 1)
-                                        ? Colors.yellow[800]
-                                        : Colors.green)),
-                            title: Text(
-                              tile.task,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  decoration: (tile.completed)
-                                      ? TextDecoration.lineThrough
-                                      : null,
-                                  color: (tile.completed)
-                                      ? Colors.grey
-                                      : Colors.black),
-                            ),
-                            /*trailing: Text(
+                          child: (!tile.completed)
+                              ? ListTile(
+                                  key: ValueKey(tile),
+                                  leading: CircleAvatar(
+                                      radius: 8,
+                                      backgroundColor: (tile.pirority == 0)
+                                          ? Colors.red[500]
+                                          : ((tile.pirority == 1)
+                                              ? Colors.yellow[800]
+                                              : Colors.green)),
+                                  title: Text(
+                                    tile.task,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        decoration: (tile.completed)
+                                            ? TextDecoration.lineThrough
+                                            : null,
+                                        color: (tile.completed)
+                                            ? Colors.grey
+                                            : Colors.black),
+                                  ),
+                                  /*trailing: Text(
                         DateFormat('jm').format(tile.creationTime),
                         style: const TextStyle(fontSize: 12),
                       ),*/
-                            trailing: const Icon(
-                              Icons.drag_indicator,
-                              color: Colors.grey,
-                            ),
-                          ),
+                                  trailing: const Icon(
+                                    Icons.drag_indicator,
+                                    color: Colors.grey,
+                                  ),
+                                )
+                              : const SizedBox(),
                         ),
                     ],
                     onReorder: (oldIndex, newIndex) {

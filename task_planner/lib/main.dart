@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import './providers/tasks_provider.dart';
 
+import './providers/tasks_provider.dart';
 import './screens/home_screen.dart';
 import './screens/add_task_screen.dart';
 import './screens/edit_task.dart';
@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
         ),
         home: const Scaffold(
           body: Home(),
+          drawer: Drawer(),
         ),
         routes: {
           AddTask.routeName: (context) => AddTask(),

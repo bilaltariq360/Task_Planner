@@ -48,7 +48,7 @@ class Home extends StatelessWidget {
           ),
           const Profile(),
           ...tasks.tasks.map((task) {
-            return MainTask(task.taskHeading, task.imagePath, true);
+            return MainTask(task.taskHeading, task.imagePath);
           }),
           const SizedBox(height: 50)
         ],
